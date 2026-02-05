@@ -3,269 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>البث المباشر</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { 
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); 
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.container {
-    width: 95%;
-    max-width: 1200px;
-    padding: 20px;
-}
-.header {
-    text-align: center;
-    margin-bottom: 25px;
-}
-.live-badge {
-    background: linear-gradient(45deg, #ff0000, #cc0000);
-    color: white;
-    padding: 15px 35px;
-    border-radius: 30px;
-    display: inline-block;
-    font-size: 20px;
-    font-weight: bold;
-    box-shadow: 0 8px 20px rgba(255,0,0,0.4);
-    animation: pulse 2s infinite;
-}
-@keyframes pulse {
-    0%, 100% { transform: scale(1); box-shadow: 0 8px 20px rgba(255,0,0,0.4); }
-    50% { transform: scale(1.05); box-shadow: 0 8px 30px rgba(255,0,0,0.6); }
-}
-.video-wrapper {
-    position: relative;
-    background: #000;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 15px 50px rgba(0,0,0,0.7);
-}
-video {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-.status {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 18px;
-    text-align: center;
-    background: rgba(0,0,0,0.8);
-    padding: 20px 30px;
-    border-radius: 10px;
-    z-index: 10;
-}
-.controls {
-    margin-top: 20px;
-    text-align: center;
-}
-.btn {
-    background: linear-gradient(45deg, #4CAF50, #45a049);
-    color: white;
-    border: none;
-    padding: 12px 30px;
-    margin: 8px;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    transition: all 0.3s;
-    box-shadow: 0 4px 15px rgba(76,175,80,0.4);
-}
-.btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(76,175,80,0.6);
-}
-.btn-blue {
-    background: linear-gradient(45deg, #2196F3, #0b7dda);
-    box-shadow: 0 4px 15px rgba(33,150,243,0.4);
-}
-.btn-blue:hover {
-    box-shadow: 0 6px 20px rgba(33,150,243,0.6);
-}
-.info {
-    background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(10px);
-    padding: 25px;
-    margin-top: 25px;
-    border-radius: 15px;
-    color: white;
-    text-align: center;
-    border: 1px solid rgba(255,255,255,0.2);
-}
-.info h3 {
-    margin-bottom: 10px;
-    color: #4CAF50;
-}
-.error {
-    color: #ff4444;
-    background: rgba(255,68,68,0.1);
-    padding: 15px;
-    border-radius: 10px;
-    margin-top: 15px;
-    border: 1px solid rgba(255,68,68,0.3);
-}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f23;font-family:'Segoe UI',Tahoma,sans-serif;padding:20px}
+.container{max-width:1200px;margin:0 auto}
+.badge{background:linear-gradient(45deg,#f00,#c00);color:#fff;padding:15px 35px;border-radius:30px;display:inline-block;font-size:20px;font-weight:bold;box-shadow:0 8px 20px rgba(255,0,0,.4);animation:pulse 2s infinite;margin-bottom:20px}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.video-wrapper{background:#000;border-radius:15px;overflow:hidden;box-shadow:0 15px 50px rgba(0,0,0,.7)}
+video{width:100%;display:block}
+.controls{margin-top:20px;text-align:center}
+.btn{background:linear-gradient(45deg,#4CAF50,#45a049);color:#fff;border:none;padding:12px 30px;margin:8px;border-radius:25px;cursor:pointer;font-size:16px;font-weight:bold;transition:all .3s;box-shadow:0 4px 15px rgba(76,175,80,.4)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(76,175,80,.6)}
+.info{background:rgba(255,255,255,.1);backdrop-filter:blur(10px);padding:25px;margin-top:25px;border-radius:15px;color:#fff;text-align:center;border:1px solid rgba(255,255,255,.2)}
+#status{color:#4CAF50;margin-top:10px}
 </style>
 </head>
 <body>
-
 <div class="container">
-    <div class="header">
-        <div class="live-badge">🔴 بث مباشر الآن</div>
-    </div>
-
-    <div class="video-wrapper">
-        <video id="video" controls playsinline></video>
-        <div class="status" id="status">جاري الاتصال بالبث...</div>
-    </div>
-
-    <div class="controls">
-        <button class="btn" onclick="play()">▶️ تشغيل</button>
-        <button class="btn" onclick="pause()">⏸️ إيقاف</button>
-        <button class="btn btn-blue" onclick="reload()">🔄 تحديث</button>
-        <button class="btn btn-blue" onclick="fullscreen()">⛶ ملء الشاشة</button>
-    </div>
-
-    <div class="info">
-        <h3>حالة البث</h3>
-        <p id="info">انتظر قليلاً...</p>
-    </div>
+<center><div class="badge">🔴 بث مباشر الآن</div></center>
+<div class="video-wrapper">
+<video id="v" controls playsinline></video>
 </div>
-
+<div class="controls">
+<button class="btn" onclick="document.getElementById('v').play()">▶️ تشغيل</button>
+<button class="btn" onclick="document.getElementById('v').pause()">⏸️ إيقاف</button>
+<button class="btn" onclick="location.reload()">🔄 تحديث</button>
+</div>
+<div class="info">
+<h3>البث المباشر</h3>
+<p id="status">جاري التحميل...</p>
+</div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <script>
-const video = document.getElementById('video');
-const status = document.getElementById('status');
-const info = document.getElementById('info');
+var v=document.getElementById('v');
+var s=document.getElementById('status');
+var url='http://37.60.226.9:8080/hls/what55.m3u8';
 
-// رابط البث - غيره لرابطك
-const streamUrl = 'http://37.60.226.9:8080/hls/what55.m3u8';
-
-let hls;
-
-function initPlayer() {
-    status.textContent = 'جاري تحميل البث...';
-    info.textContent = 'محاولة الاتصال بالسيرفر...';
-    
-    if (Hls.isSupported()) {
-        hls = new Hls({
-            debug: false,
-            enableWorker: true,
-            lowLatencyMode: true,
-            maxBufferLength: 30,
-            maxMaxBufferLength: 600,
-            manifestLoadingTimeOut: 10000,
-            manifestLoadingMaxRetry: 4,
-            levelLoadingTimeOut: 10000,
-            levelLoadingMaxRetry: 4
-        });
-
-        hls.loadSource(streamUrl);
-        hls.attachMedia(video);
-
-        // عند نجاح التحميل
-        hls.on(Hls.Events.MANIFEST_PARSED, function() {
-            status.style.display = 'none';
-            info.innerHTML = '✅ <strong>البث متصل!</strong><br>اضغط تشغيل للبدء';
-            video.play().catch(e => {
-                info.innerHTML = '⚠️ اضغط زر "تشغيل" للبدء';
-            });
-        });
-
-        // عند حدوث خطأ
-        hls.on(Hls.Events.ERROR, function(event, data) {
-            if (data.fatal) {
-                status.style.display = 'block';
-                
-                switch(data.type) {
-                    case Hls.ErrorTypes.NETWORK_ERROR:
-                        status.textContent = '❌ خطأ في الاتصال بالسيرفر';
-                        info.innerHTML = '<div class="error"><strong>لا يمكن الاتصال بالبث!</strong><br><br>الأسباب المحتملة:<br>• السيرفر متوقف أو البث مش شغال<br>• الرابط غلط<br>• الفايروول بيمنع الاتصال<br>• مشكلة في الشبكة<br><br>تأكد من تشغيل OBS أو البرنامج بتاعك!</div>';
-                        
-                        // محاولة إعادة الاتصال
-                        setTimeout(() => {
-                            info.innerHTML += '<br>جاري إعادة المحاولة...';
-                            hls.loadSource(streamUrl);
-                        }, 5000);
-                        break;
-                        
-                    case Hls.ErrorTypes.MEDIA_ERROR:
-                        status.textContent = '❌ خطأ في تشغيل الفيديو';
-                        info.innerHTML = '<div class="error">مشكلة في فك تشفير البث - جاري إعادة المحاولة...</div>';
-                        hls.recoverMediaError();
-                        break;
-                        
-                    default:
-                        status.textContent = '❌ خطأ غير معروف';
-                        info.innerHTML = '<div class="error">حدث خطأ غير متوقع</div>';
-                        break;
-                }
-            }
-        });
-
-        // معلومات إضافية
-        hls.on(Hls.Events.LEVEL_LOADED, function(event, data) {
-            info.textContent = '📡 البث يعمل بجودة: ' + Math.round(data.details.totalduration) + ' ثانية';
-        });
-
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        // Safari
-        video.src = streamUrl;
-        video.addEventListener('loadedmetadata', function() {
-            status.style.display = 'none';
-            info.textContent = '✅ البث متصل! (Safari)';
-            video.play();
-        });
-        
-        video.addEventListener('error', function() {
-            status.style.display = 'block';
-            status.textContent = '❌ خطأ في الاتصال';
-            info.innerHTML = '<div class="error">لا يمكن الاتصال بالبث - تأكد من تشغيل السيرفر!</div>';
-        });
-    } else {
-        status.textContent = '❌ المتصفح غير مدعوم';
-        info.innerHTML = '<div class="error">المتصفح بتاعك مش بيدعم بث HLS<br>جرب Chrome أو Safari</div>';
-    }
+// تعطيل Mixed Content Warning (يشتغل في بعض الحالات)
+if(location.protocol==='https:'){
+    var meta=document.createElement('meta');
+    meta.httpEquiv='Content-Security-Policy';
+    meta.content='upgrade-insecure-requests';
+    document.head.appendChild(meta);
 }
 
-// وظائف التحكم
-function play() {
-    video.play().catch(e => {
-        info.textContent = '⚠️ ما فيش بث للتشغيل';
+if(Hls.isSupported()){
+    var h=new Hls({enableWorker:true,lowLatencyMode:true});
+    h.loadSource(url);
+    h.attachMedia(v);
+    h.on(Hls.Events.MANIFEST_PARSED,function(){
+        s.textContent='✅ البث متصل!';
+        v.play().catch(function(){s.textContent='⚠️ اضغط تشغيل'});
+    });
+    h.on(Hls.Events.ERROR,function(e,d){
+        if(d.fatal){
+            s.textContent='❌ خطأ: '+d.type;
+            setTimeout(function(){h.loadSource(url)},3000);
+        }
+    });
+}else if(v.canPlayType('application/vnd.apple.mpegurl')){
+    v.src=url;
+    v.addEventListener('loadedmetadata',function(){
+        s.textContent='✅ البث متصل!';
+        v.play();
     });
 }
-
-function pause() {
-    video.pause();
-}
-
-function reload() {
-    info.textContent = 'جاري إعادة التحميل...';
-    if (hls) {
-        hls.destroy();
-    }
-    initPlayer();
-}
-
-function fullscreen() {
-    if (video.requestFullscreen) {
-        video.requestFullscreen();
-    } else if (video.webkitRequestFullscreen) {
-        video.webkitRequestFullscreen();
-    }
-}
-
-// بدء التشغيل
-initPlayer();
 </script>
-
 </body>
 </html>
